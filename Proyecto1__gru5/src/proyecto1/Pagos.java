@@ -1,10 +1,19 @@
-package heladeria;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
+package proyecto1;
+
 import javax.swing.JOptionPane;
+import java.util.Calendar;
 
-public class realizarPagos {
+public class Pagos {
 
+    static Calendar Hora = Calendar.getInstance();
+    static Calendar Fecha = Calendar.getInstance();
+
+    int hora = Hora.get(Calendar.HOUR_OF_DAY);
+    int minuto = Hora.get(Calendar.MINUTE);
+    int dia = Fecha.get(Calendar.DATE);
+    int mes = Fecha.get(Calendar.MONTH);
+    int anno = Fecha.get(Calendar.YEAR);
     int numeroDePago[] = new int[10];
     String fecha[] = new String[10];
     String cedula[] = new String[10];
@@ -12,9 +21,6 @@ public class realizarPagos {
     String apellido[] = new String[10];
     String apellido2[] = new String[10];
     int numeroDeCaja[] = new int[10];
-    float agua[] = new float[10];
-    float luz[] = new float[10];
-    String telefono[] = new String[10];
     int numeroDeFactura[] = new int[10];
     float montoAPagar[] = new float[10];
     float comicion[] = new float[10];
@@ -23,20 +29,20 @@ public class realizarPagos {
     float vuelto[] = new float[10];
     int opciones[] = new int[10];
     int tipoS = 0;
+    int i = 8;
+    int incrementar = 100;
+    int incrementar2 = 1;
+    String fechaYHoraActual = hora + ":" + minuto + "          " + dia + "/" + mes + "/" + anno;
 
-//int numeroDePago, DateTimeAtCompleted fecha, String cedula, String nombre, String apellido, String apellido2, int numeroDeCaja, float agua, float luz, String telefono, int numeroDeFactura, float montoAPagar, float comicion, float deducido, float pagaCliente, float vuelto
     public void Inicializar() {
         for (int i = 0; i < 10; i++) {
-            numeroDePago[i] = 1;
-            fecha[i] = "NG";
-            cedula[i] = "NG";
-            nombre[i] = "NG";
-            apellido[i] = "NG";
-            apellido2[i] = "NG";
+            numeroDePago[i] = 0;
+            fecha[i] = "";
+            cedula[i] = "";
+            nombre[i] = "";
+            apellido[i] = "";
+            apellido2[i] = "";
             numeroDeCaja[i] = 0;
-            agua[i] = 0;
-            luz[i] = 0;
-            telefono[i] = "NG";
             numeroDeFactura[i] = 100;
             montoAPagar[i] = 0;
             comicion[i] = 0;
@@ -44,18 +50,15 @@ public class realizarPagos {
             pagaCliente[i] = 0;
             vuelto[i] = 0;
             opciones[i] = 0;
+            this.i = 0;
+            incrementar = 100;
+            incrementar2 = 1;
         }
         JOptionPane.showMessageDialog(null, "La inicialización se realizo con exito");
-
     }
 
     public void ingresarDatos() {
-
-        int vector[] = new int[10];
-        int incrementar = 100;
-        int incrementar2 = 1;
-
-        for (int i = 0; i < vector.length; i++) {
+        while (i <= 9) {
 
             numeroDeFactura[i] = incrementar;
             incrementar++;
@@ -63,6 +66,7 @@ public class realizarPagos {
             numeroDePago[i] = incrementar2;
             incrementar2++;
 
+            fecha[i] = fechaYHoraActual;
             cedula[i] = JOptionPane.showInputDialog("Digite el numero de cedula");
             nombre[i] = JOptionPane.showInputDialog("Digite el numbre");
             apellido[i] = JOptionPane.showInputDialog("Digite el primer apellido.");
@@ -76,7 +80,6 @@ public class realizarPagos {
 
             switch (opciones[i]) {
                 case 1:
-
                     montoAPagar[i] = Integer.parseInt(JOptionPane.showInputDialog("Digite el monto a pagar"));
                     comicion[i] = (int) (montoAPagar[i] * 0.04);
                     JOptionPane.showMessageDialog(null, "La comicion es de: " + comicion[i]);
@@ -88,12 +91,11 @@ public class realizarPagos {
                     JOptionPane.showMessageDialog(null, "Numero de pago: " + numeroDePago[i] + "\nFecha: " + fecha[i] + "\n\nCedula: " + cedula[i] + "          Nombre: " + nombre[i] + "\nApellido 1: " + apellido[i] + "          Apellido 2: " + apellido2[i] + ""
                             + "\n\nTipo de servicio: " + opciones[i] + "     (1: Luz, 2: Telefono, 3: agua)\n\nNumero de factura: " + numeroDeFactura[i] + "          Monto a pagar: " + montoAPagar[i] + "\nComicion autorizada: " + comicion[i] + "          Paga con: " + pagaCliente[i] + ""
                             + "\nMonto deducido: " + deducido[i] + "          Vuelto: " + vuelto[i]);
-
                     break;
 
                 case 2:
                     montoAPagar[i] = Integer.parseInt(JOptionPane.showInputDialog("Digite el monto a pagar"));
-                    comicion[i] = (int) (montoAPagar[i] * 0.04);
+                    comicion[i] = (int) (montoAPagar[i] * 5.5);
                     JOptionPane.showMessageDialog(null, "La comicion es de: " + comicion[i]);
                     deducido[i] = montoAPagar[i] - comicion[i];
                     JOptionPane.showMessageDialog(null, "El deducido es de: " + deducido[i]);
@@ -103,12 +105,11 @@ public class realizarPagos {
                     JOptionPane.showMessageDialog(null, "Numero de pago: " + numeroDePago[i] + "\nFecha: " + fecha[i] + "\n\nCedula: " + cedula[i] + "          Nombre: " + nombre[i] + "\nApellido 1: " + apellido[i] + "          Apellido 2: " + apellido2[i] + ""
                             + "\n\nTipo de servicio: " + opciones[i] + "     (1: Luz, 2: Telefono, 3: agua)\n\nNumero de factura: " + numeroDeFactura[i] + "          Monto a pagar: " + montoAPagar[i] + "\nComicion autorizada: " + comicion[i] + "          Paga con: " + pagaCliente[i] + ""
                             + "\nMonto deducido: " + deducido[i] + "          Vuelto: " + vuelto[i]);
-
                     break;
 
                 case 3:
                     montoAPagar[i] = Integer.parseInt(JOptionPane.showInputDialog("Digite el monto a pagar"));
-                    comicion[i] = (int) (montoAPagar[i] * 0.04);
+                    comicion[i] = (int) (montoAPagar[i] * 6.5);
                     JOptionPane.showMessageDialog(null, "La comicion es de: " + comicion[i]);
                     deducido[i] = montoAPagar[i] - comicion[i];
                     JOptionPane.showMessageDialog(null, "El deducido es de: " + deducido[i]);
@@ -118,18 +119,19 @@ public class realizarPagos {
                     JOptionPane.showMessageDialog(null, "Numero de pago: " + numeroDePago[i] + "\nFecha: " + fecha[i] + "\n\nCedula: " + cedula[i] + "          Nombre: " + nombre[i] + "\nApellido 1: " + apellido[i] + "          Apellido 2: " + apellido2[i] + ""
                             + "\n\nTipo de servicio: " + opciones[i] + "     (1: Luz, 2: Telefono, 3: agua)\n\nNumero de factura: " + numeroDeFactura[i] + "          Monto a pagar: " + montoAPagar[i] + "\nComicion autorizada: " + comicion[i] + "          Paga con: " + pagaCliente[i] + ""
                             + "\nMonto deducido: " + deducido[i] + "          Vuelto: " + vuelto[i]);
-
                     break;
             }
+            i++;
             int continuar = Integer.parseInt(JOptionPane.showInputDialog("+++++Decea continuar+++++\n"
                     + "1.SI\n"
                     + "2.NO"));
             if (continuar == 2) {
                 break;
             }
-
         }
-
+        if (i >= 10) {
+            JOptionPane.showMessageDialog(null, "El vector se incuentra lleno");
+        }
     }
 
     public void consultar() {
@@ -140,7 +142,6 @@ public class realizarPagos {
         while ((indice < 10) && (consulta != numeroDePago[indice])) {
             indice++;
         }
-
         if (indice >= 10) {
             JOptionPane.showMessageDialog(null, "El numero de pago ingresado no existe");
         } else {
@@ -148,7 +149,6 @@ public class realizarPagos {
             JOptionPane.showMessageDialog(null, "Numero de pago: " + numeroDePago[indice] + "\nFecha: " + fecha[indice] + "\n\nCedula: " + cedula[indice] + "          Nombre: " + nombre[indice] + "\nApellido 1: " + apellido[indice] + "          Apellido 2: " + apellido2[indice] + ""
                     + "\n\nTipo de servicio: " + opciones[indice] + "     (1: Luz, 2: Telefono, 3: agua)\n\nNumero de factura: " + numeroDeFactura[indice] + "          Monto a pagar: " + montoAPagar[indice] + "\nComicion autorizada: " + comicion[indice] + "          Paga con: " + pagaCliente[indice] + ""
                     + "\nMonto deducido: " + deducido[indice] + "          Vuelto: " + vuelto[indice]);
-
         }
     }
 
@@ -205,49 +205,44 @@ public class realizarPagos {
     public void eliminarPago() {
         int pagoAEliminar = Integer.parseInt(JOptionPane.showInputDialog("Digite el número de pago que desea eliminar:"));
 
-        for (int i = 0; i < numeroDePago.length; i++) {
-            if (numeroDePago[i] == pagoAEliminar) {
+        int indice = 0;
 
-                numeroDePago[i] = 0;
-                fecha[i] = "";
-                cedula[i] = "";
-                nombre[i] = "";
-                apellido[i] = "";
-                apellido2[i] = "";
-                numeroDeCaja[i] = 0;
-                agua[i] = 0;
-                luz[i] = 0;
-                telefono[i] = "";
-                numeroDeFactura[i] = 0;
-                montoAPagar[i] = 0;
-                comicion[i] = 0;
-                deducido[i] = 0;
-                pagaCliente[i] = 0;
-                vuelto[i] = 0;
-                opciones[i] = 0;
-                JOptionPane.showMessageDialog(null, "El pago con número " + pagoAEliminar + " ha sido eliminado.");
-                break;
-            } else {
-
-                JOptionPane.showMessageDialog(null, "No se encontró el pago con número " + pagoAEliminar + ".");
-            }
+        while ((indice < 10) && (pagoAEliminar != numeroDePago[indice])) {
+            indice++;
         }
-
+        if (indice >= 10) {
+            JOptionPane.showMessageDialog(null, "El numero de pago ingresado no existe");
+        } else {
+            numeroDePago[indice] = 0;
+            fecha[indice] = "";
+            cedula[indice] = "";
+            nombre[indice] = "";
+            apellido[indice] = "";
+            apellido2[indice] = "";
+            numeroDeCaja[indice] = 0;
+            numeroDeFactura[indice] = 0;
+            montoAPagar[indice] = 0;
+            comicion[indice] = 0;
+            deducido[indice] = 0;
+            pagaCliente[indice] = 0;
+            vuelto[indice] = 0;
+            opciones[indice] = 0;
+            JOptionPane.showMessageDialog(null, "El pago con número " + pagoAEliminar + " ha sido eliminado.");
+        }
     }
 
-    public void reproducir() {
+    public void impremirPagos() {
         String impremir = "";
         for (int i = 0; i < 10; i++) {
-            impremir += "Numero de pago: " + numeroDePago[i] + "\nFecha: " + fecha[i] + "\n\nCedula: " + cedula[i] + "          Nombre: " + nombre[i] + "\nApellido 1: " + apellido[i] + "          Apellido 2: " + apellido2[i] + ""
-                    + "\n\nTipo de servicio: " + opciones[i] + "     (1: Luz, 2: Telefono, 3: agua)\n\nNumero de factura: " + numeroDeFactura[i] + "          Monto a pagar: " + montoAPagar[i] + "\nComicion autorizada: " + comicion[i] + "          Paga con: " + pagaCliente[i] + ""
-                    + "\nMonto deducido: " + deducido[i] + "          Vuelto: " + vuelto[i] + "\n\n\n";
-            JOptionPane.showMessageDialog(null, impremir);
-            impremir = "";
-            if (numeroDePago[i] < 0) {
-                break;
+
+            if (numeroDePago[i] != 0) {
+                impremir += "Numero de pago: " + numeroDePago[i] + "\nFecha: " + fecha[i] + "\n\nCedula: " + cedula[i] + "          Nombre: " + nombre[i] + "\nApellido 1: " + apellido[i] + "          Apellido 2: " + apellido2[i] + ""
+                        + "\n\nTipo de servicio: " + opciones[i] + "     (1: Luz, 2: Telefono, 3: agua)\n\nNumero de factura: " + numeroDeFactura[i] + "          Monto a pagar: " + montoAPagar[i] + "\nComicion autorizada: " + comicion[i] + "          Paga con: " + pagaCliente[i] + ""
+                        + "\nMonto deducido: " + deducido[i] + "          Vuelto: " + vuelto[i] + "\n\n\n";
+                JOptionPane.showMessageDialog(null, impremir);
+                impremir = "";
             }
         }
-
     }
 
     //PARTE DE JORMIAN A PARTIR DE ACÁ    
@@ -265,11 +260,8 @@ public class realizarPagos {
 
                 JOptionPane.showMessageDialog(null, imprimir2);
                 imprimir2 = "";
-
             }
-
         }
-
     }
 
     public void mostrarServicios() {
@@ -280,22 +272,16 @@ public class realizarPagos {
 
         switch (tipoS) {
             case 1:
-
                 PagosxServicio();
-
                 break;
-
             case 2:
                 PagosxServicio();
                 break;
-
             case 3:
                 PagosxServicio();
                 break;
-
             default:
                 JOptionPane.showMessageDialog(null, "Servicio inválido");
-
         }
     }
 
@@ -309,13 +295,7 @@ public class realizarPagos {
                         + "\n\nNumero de factura: " + numeroDeFactura[i]
                         + "          Monto a pagar: " + montoAPagar[i] + "\nComicion autorizada: " + comicion[i]
                         + "          Paga con: " + pagaCliente[i] + "" + "\nMonto deducido: " + deducido[i] + "         Vuelto: " + vuelto[i]);
-            } else {
-                if (numeroDeCaja[i] < 0) {
-                    JOptionPane.showMessageDialog(null, "No existe registro con ese número de caja");
-
-                }
             }
-
         }
     }
 
@@ -343,7 +323,6 @@ public class realizarPagos {
                     totalAgua += montoAPagar[i];
                     numAgua++;
                     break;
-           
             }
             totalGeneral += montoAPagar[i];
             numTransacciones++;
@@ -354,8 +333,8 @@ public class realizarPagos {
                 + "Telefono: " + numTelefono + " transacciones, $" + totalTelefono + "\n"
                 + "Agua: " + numAgua + " transacciones, $" + totalAgua + "\n\n"
                 + "Total general: " + numTransacciones + " transacciones, $" + totalGeneral;
-
         JOptionPane.showMessageDialog(null, mensaje);
     }
-
 }
+
+
